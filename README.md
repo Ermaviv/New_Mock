@@ -10,5 +10,7 @@
 src/main/resources/application.properties
 ```
 ## Стек
+- Amazon Corretto 17.0.15
+- Maven
 - JavaSpring
 - Lombok
