@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import tools.jackson.databind.ObjectMapper;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.concurrent.ThreadLocalRandom;
 
 @RestController
@@ -42,12 +43,16 @@ public class MainController {
             else {
                 maxLimit = new BigDecimal(10000);
             }
+            BigDecimal zero = new BigDecimal("0");
+            BigDecimal range = maxLimit.subtract(zero);
+            BigDecimal Balance = zero.add(
+                    range.multiply(BigDecimal.valueOf(Math.random()))).setScale(2, RoundingMode.HALF_UP);
             ResponseDTO responseDTO = new ResponseDTO();
 //            ResponseDTO responseDTO1 = new ResponseDTO();
             responseDTO.setRqUID(RqUID);
             responseDTO.setAccount(requestDTO.getAccount());
             responseDTO.setCurrency(currency);
-            responseDTO.setBalance(new BigDecimal(777));
+            responseDTO.setBalance(Balance);
             responseDTO.setMaxLimit(maxLimit);
             responseDTO.setClientId(clientId);
 
